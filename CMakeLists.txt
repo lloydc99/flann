@@ -66,6 +66,9 @@ if (NOT BUILD_C_BINDINGS)
     set(BUILD_MATLAB_BINDINGS OFF)
 endif()
 
+# Since adding new serialization flann depends on lz4
+find_package(PkgConfig)
+pkg_check_modules(LZ4 REQUIRED liblz4)
 
 # find python
 find_package(PythonInterp)
@@ -112,7 +115,7 @@ if (USE_MPI AND HDF5_IS_PARALLEL)
 endif()
 
 
-find_package(GTest) 
+find_package(GTest)
 if (NOT GTEST_FOUND)
 	message(WARNING "gtest library not found, some tests will not be run")
 endif()
